@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import './ScoreUpdateScreen.dart';
 
-
 class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -14,12 +13,7 @@ class HomeScreen extends StatelessWidget {
   }
 }
 
-class PlayersData {
-  String player1 = '';
-  String player2 = '';
-  String player3 = '';
-  String player4 = '';
-}
+List<String> playerslist = ["player1", "player2", "player3", "player4"];
 
 class NewPlayerRegistration extends StatefulWidget {
   @override
@@ -29,53 +23,62 @@ class NewPlayerRegistration extends StatefulWidget {
 }
 
 class NewPlayerRegistrationForm extends State<NewPlayerRegistration> {
-  PlayersData _data = new PlayersData();
 
   void gotonewscreen() {
     Navigator.push(
       context,
       MaterialPageRoute(
-          builder: (context) => new ScoreUpdateScreen(players: _data)),
+          builder: (context) => new ScoreUpdateScreen(players: playerslist)),
     );
   }
 
   @override
   Widget build(BuildContext context) {
-    final Size screenSize = MediaQuery.of(context).size;
 
-    return Container
-      (child: ListView(
+    return Container(
+      child: ListView(
         children: <Widget>[
-          TextField(
-              keyboardType: TextInputType.text,
-              decoration: InputDecoration(
-                  hintText: 'Rameshwor', labelText: 'Player1'),
-              onChanged: (String value) {
-                this._data.player1 = value;
-              }),
-          TextField(
-              keyboardType: TextInputType.text,
-              decoration:
-                  InputDecoration(hintText: 'Sujan', labelText: 'Player2'),
-              onChanged: (String value) {
-                this._data.player2 = value;
-              }),
-          TextField(
-              keyboardType: TextInputType.text,
-              decoration:
-                  InputDecoration(hintText: 'Ankur', labelText: 'Player3'),
-              onChanged: (String value) {
-                this._data.player3 = value;
-              }),
-          TextField(
-              keyboardType: TextInputType.text,
-              decoration:
-                  InputDecoration(hintText: 'Subash', labelText: 'Player4'),
-              onChanged: (String value) {
-                this._data.player4 = value;
-              }),
           Container(
-            width: screenSize.width,
+            margin: EdgeInsets.all(10.0),
+            child: TextField(
+                keyboardType: TextInputType.text,
+                decoration: InputDecoration(
+                    labelText: 'Player1'),
+                onChanged: (String value) {
+                  playerslist[0] = value;
+                }),
+          ),
+          Container(
+            margin: EdgeInsets.all(10.0),
+            child: TextField(
+                keyboardType: TextInputType.text,
+                decoration:
+                    InputDecoration(labelText: 'Player2'),
+                onChanged: (String value) {
+                  playerslist[1] = value;
+                }),
+          ),
+          Container(
+            margin: EdgeInsets.all(10.0),
+            child: TextField(
+                keyboardType: TextInputType.text,
+                decoration:
+                    InputDecoration(labelText: 'Player3'),
+                onChanged: (String value) {
+                  playerslist[2] = value;
+                }),
+          ),
+          Container(
+            margin: EdgeInsets.all(10.0),
+            child: TextField(
+                keyboardType: TextInputType.text,
+                decoration:
+                    InputDecoration( labelText: 'Player4'),
+                onChanged: (String value) {
+                  playerslist[3] = value;
+                }),
+          ),
+          Container(
             child: RaisedButton(
               child: Text(
                 'Play',
@@ -84,7 +87,7 @@ class NewPlayerRegistrationForm extends State<NewPlayerRegistration> {
               onPressed: () => this.gotonewscreen(),
               color: Colors.blue,
             ),
-            margin: EdgeInsets.only(top: 20.0),
+            margin: EdgeInsets.all(30.0),
           )
         ],
       ),
