@@ -2,9 +2,17 @@ import 'package:flutter/material.dart';
 import './ScoreUpdateDialog.dart';
 
 class ScoreUpdateScreen extends StatelessWidget {
-  int score_player_1 = null;
+  int score1 = 0;
   final players;
   ScoreUpdateScreen({this.players});
+
+  gotonewscreen(BuildContext context) async {
+    await Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => new ScoreUpdateDialog(score1)),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,7 +38,7 @@ class ScoreUpdateScreen extends StatelessWidget {
                     margin: EdgeInsets.only(top: 20.0),
                     alignment: Alignment.center,
                     child: Text(
-                      score_player_1.toString(),
+                      score1.toString(),
                       style: TextStyle(fontSize: 45.0),
                     ),
                   ),
@@ -40,11 +48,7 @@ class ScoreUpdateScreen extends StatelessWidget {
                         'Add Score',
                         style: TextStyle(color: Colors.white),
                       ),
-                      onPressed: () => Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => new ScoreUpdateDialog(score: score_player_1)),
-                          ),
+                      onPressed: () => this.gotonewscreen(context),
                       color: Colors.blue,
                     ),
                     margin: EdgeInsets.only(top: 20.0),
