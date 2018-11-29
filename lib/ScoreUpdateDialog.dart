@@ -2,22 +2,16 @@ import 'package:flutter/material.dart';
 import './ScoreUpdateScreen.dart';
 
 class ScoreUpdateDialog extends StatelessWidget {
-  int oldscore;
+  int oldscore;// this thing should be final
   ScoreUpdateDialog(this.oldscore);
   int newscore = 0;
 
   gobacktoScreen(BuildContext context, newscore){
     int finalscore = 0;
-    // finalscore = this.oldscore + newscore;
-    print('old score');
-    print(this.oldscore);
-    print('new score');
-    print(newscore);
     finalscore = this.oldscore + newscore;
     Navigator.pop(context, finalscore);
-    print('final score');
-    print(finalscore);
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -31,8 +25,6 @@ class ScoreUpdateDialog extends StatelessWidget {
             decoration: InputDecoration(labelText: 'Add Score'),
             onChanged: (String value) {
               this.newscore = int.parse(value);
-              print("New Score");
-              print(this.newscore);
             }
           ),
         ),

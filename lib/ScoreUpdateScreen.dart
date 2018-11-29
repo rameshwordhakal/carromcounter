@@ -1,16 +1,22 @@
 import 'package:flutter/material.dart';
 import './ScoreUpdateDialog.dart';
 
-class ScoreUpdateScreen extends StatelessWidget {
-  int score1 = 0;
+class ScoreUpdateScreen extends StatefulWidget {
   final players;
   ScoreUpdateScreen({this.players});
+  _ScoreUpdateScreenState createState() => _ScoreUpdateScreenState();
+}
 
-  gotonewscreen(BuildContext context) async {
-    await Navigator.push(
+class _ScoreUpdateScreenState extends State<ScoreUpdateScreen> {
+  List<int> scores = [0, 0, 0, 0];
+  gotonewscreen(BuildContext context, index) async {
+    var finalScore = await Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => new ScoreUpdateDialog(score1)),
+      MaterialPageRoute(builder: (context) => new ScoreUpdateDialog(scores[index])),
     );
+    setState(() {
+      scores[index] = finalScore;
+    });
   }
 
   @override
@@ -21,7 +27,7 @@ class ScoreUpdateScreen extends StatelessWidget {
       ),
       body: Container(
         child: GridView.builder(
-          itemCount: players.length,
+          itemCount: widget.players.length,
           itemBuilder: (context, index) {
             return Card(
               child: Column(
@@ -30,7 +36,7 @@ class ScoreUpdateScreen extends StatelessWidget {
                     margin: EdgeInsets.all(6),
                     alignment: Alignment.center,
                     child: Text(
-                      players[index],
+                      widget.players[index],
                       style: TextStyle(fontSize: 20.0),
                     ),
                   ),
@@ -38,7 +44,7 @@ class ScoreUpdateScreen extends StatelessWidget {
                     margin: EdgeInsets.only(top: 20.0),
                     alignment: Alignment.center,
                     child: Text(
-                      score1.toString(),
+                      scores[index].toString(),
                       style: TextStyle(fontSize: 45.0),
                     ),
                   ),
@@ -46,9 +52,9 @@ class ScoreUpdateScreen extends StatelessWidget {
                     child: RaisedButton(
                       child: Text(
                         'Add Score',
-                        style: TextStyle(color: Colors.white),
+                        style: TextStyle(color: Colors.white, fontSize: 20.0),
                       ),
-                      onPressed: () => this.gotonewscreen(context),
+                      onPressed: () => this.gotonewscreen(context, index),
                       color: Colors.blue,
                     ),
                     margin: EdgeInsets.only(top: 20.0),
