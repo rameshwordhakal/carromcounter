@@ -23,6 +23,7 @@ class ScoreUpdateDialog extends StatelessWidget {
           child: TextField(
             keyboardType: TextInputType.number,
             decoration: InputDecoration(labelText: 'Add Score'),
+            autofocus: true,
             onChanged: (String value) {
               this.newscore = int.parse(value);
             }
