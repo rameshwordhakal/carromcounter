@@ -19,9 +19,34 @@ class _ScoreUpdateScreenState extends State<ScoreUpdateScreen> {
     });
   }
 
+    Future<bool> _onBackPressed() {
+    return showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text('Confirmation Dialog'),
+            content: Text('Are you sure you want to reset the score?'),
+            actions: <Widget>[
+              FlatButton(
+                child: Text('No'),
+                onPressed: () {
+                  Navigator.of(context).pop(false);
+                },
+              ),
+              FlatButton(
+                child: Text('Yes'),
+                onPressed: () {
+                  Navigator.of(context).pop(true);
+                },
+              ),
+            ],
+          );
+        });
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return WillPopScope(onWillPop: _onBackPressed, child: Scaffold(
       appBar: AppBar(
         title: Text("Score Update"),
       ),
@@ -58,7 +83,15 @@ class _ScoreUpdateScreenState extends State<ScoreUpdateScreen> {
                       color: Colors.blue,
                     ),
                     margin: EdgeInsets.only(top: 20.0),
-                  )
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(top: 5),
+                    alignment: Alignment.center,
+                    child: Text(
+                      (83-scores[index]).toString(),
+                      style: TextStyle(fontSize: 30.0),
+                    ),
+                  ),
                 ],
               ),
             );
@@ -68,6 +101,6 @@ class _ScoreUpdateScreenState extends State<ScoreUpdateScreen> {
           ),
         ),
       ),
-    );
+    ));
   }
 }
